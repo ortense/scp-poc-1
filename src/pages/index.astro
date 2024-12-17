@@ -1,5 +1,10 @@
 ---
+import { API_HOST } from "../config/env"
+import UserList from "../user/components/UserList.astro"
+import { createUserRepository } from "../user/repository"
 
+const repo = createUserRepository(API_HOST)
+const users = await repo.getAll()
 ---
 
 <html lang="en">
@@ -11,6 +16,11 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+    <h2>Users from API</h2>
+    {
+      !users.ok
+      ? <p>Ops! Deu ruim aqui</p>
+      : <UserList data={users.value} />
+    }
 	</body>
 </html>

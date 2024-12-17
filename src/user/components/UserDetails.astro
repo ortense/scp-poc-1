@@ -1,0 +1,33 @@
+---
+import type { User } from "../types";
+
+interface Props {
+  data: User;
+}
+
+const { data } = Astro.props;
+---
+
+<table>
+  <tr>
+    <td>user.id</td>
+    <td>{data.id}</td>
+  </tr>
+  <tr>
+    <td>user.username</td>
+    <td>{data.username}</td>
+  </tr>
+  <tr>
+    <td>user.email</td>
+    <td>{data.email}</td>
+  </tr>
+  <tr>
+    <td>user.address.street</td>
+    <td>{data.address.street}</td>
+  </tr>
+  <tr>
+    <td>user.address.city</td>
+    <td>{data.address.city}</td>
+  </tr>
+</table>
+

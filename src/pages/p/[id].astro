@@ -1,0 +1,30 @@
+---
+import { API_HOST } from "../../config/env";
+import UserDetails from "../../user/components/UserDetails.astro";
+import { createUserRepository } from "../../user/repository";
+
+const { id } =  Astro.params;
+const repo = createUserRepository(API_HOST)
+const user = await repo.getByID(String(id))
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+	<a href="/">back to list</a>
+	{
+	 !user.ok
+		? <h1>Deu ruim pra obter o usuário {id}</h1>
+		: (
+		  <h1>{user.value.name}</h1>
+      <UserDetails data={user.value} />
+    )
+	}
+	</body>
+</html>

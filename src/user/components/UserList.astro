@@ -1,0 +1,19 @@
+---
+import type { User } from "../types";
+
+interface Props {
+  data: User[];
+}
+
+const { data } = Astro.props;
+---
+
+<ul>
+  {
+    data.map((user) => (
+      <li id={user.id.toString()}>
+        <a href={`/p/${user.id}`}>{user.name}</a>
+      </li>
+    ))
+  }
+</ul>
